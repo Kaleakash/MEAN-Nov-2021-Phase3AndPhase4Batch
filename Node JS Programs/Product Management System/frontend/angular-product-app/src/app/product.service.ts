@@ -24,4 +24,14 @@ export class ProductService {
   storeProductDetails(product:Product):Observable<any>{
     return this.http.post("http://localhost:9090/addProduct",product)
   }
+
+  deleteProductDetails(pid:any):Observable<any>{
+    return this.http.delete("http://localhost:9090/deleteProduct/"+pid);
+  }
+
+  updateProductInfo(product:any): Observable<any>{
+    return this.http.put("http://localhost:9090/updateProductPrice",product);
+  }
 }
+
+

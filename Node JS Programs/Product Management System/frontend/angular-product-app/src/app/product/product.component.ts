@@ -18,6 +18,12 @@ export class ProductComponent implements OnInit {
     url:new FormControl()
   });
   storeMsg:string="";
+  deleteMsg:string="";
+  flag : boolean = false;
+  pid:number=0;
+  price:number=0;
+  updateMsg:string= "";
+
   constructor(public prodSer:ProductService) { } // DI for Service class
 
   // life cycle of component. it will call only once 
@@ -40,6 +46,31 @@ export class ProductComponent implements OnInit {
    this.productRef.reset(); // reset of form old values. 
   }
 
+  deleteProductInfo(pid:any){
+    //console.log("Delet function called.."+pid);
+    this.prodSer.deleteProductDetails(pid).
+    subscribe(result=>this.deleteMsg=result.msg,
+    error=>console.log(error),
+    ()=>this.retetriveAllProduct());
+  }
 
+  
+  updateProduct(product:any){
+    //console.log(product);
+    this.updateMsg="";
+    this.pid = product.pid;
+    this.price = product.price;
+    this.flag=true;
+  }
 
+  updateProductInfo(){
+    this.deleteMsg="";
+    //console.log(this.pid+" "+this.price);
+    let product= {"pid":this.pid,"price":this.price};
+    this.prodSer.updateProductInfo(product).subscribe(
+      result=>this.updateMsg = result.msg
+      ,error=>console.log(error),
+      ()=>this.retetriveAllProduct());
+      this.flag = false;
+  }
 }

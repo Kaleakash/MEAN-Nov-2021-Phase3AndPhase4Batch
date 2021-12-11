@@ -1,31 +1,48 @@
-<div>
+<div class="container">
     <h2>Add new product</h2>
-    <form [formGroup]="productRef" (ngSubmit)="storeProductInfo()">
+    <form [formGroup]="productRef" (ngSubmit)="storeProductInfo()" class="form-group1">
         <label>PId</label>
-        <input type="text" formControlName="pid"/><br/>
+        <input type="text" formControlName="pid" class="form-control"/><br/>
         <label>PName</label>
-        <input type="text" formControlName="pname"/><br/>
+        <input type="text" formControlName="pname" class="form-control"/><br/>
         <label>Price</label>
-        <input type="number" formControlName="price"/><br/>
+        <input type="number" formControlName="price" class="form-control"/><br/>
         <label>URL</label>
-        <input type="url" formControlName="url"/><br/>
-        <input type="submit" value="submit"/>
-        <input type="reset" value="reset"/>
+        <input type="url" formControlName="url" class="form-control"/><br/>
+        <input type="submit" value="submit" class="btn btn-success"/>
+        <input type="reset" value="reset" class="btn btn-info"/>
     </form>
     {{storeMsg}}
 <hr/>
-<table>
+<table class="table">
     <tr>
         <th>PId</th>
         <th>PName</th>
         <th>Price</th>
         <th>URL</th>
+        <th>Delete</th>
+        <th>Update</th>
     </tr>
     <tr *ngFor="let pp of product">
             <td>{{pp.pid}}</td>
             <td>{{pp.pname}}</td>
             <td>{{pp.price}}</td>
             <td><img src={{pp.url}} width="100px" height="100px"/></td>
+            <td><input type="button" value="delete" (click)="deleteProductInfo(pp.pid)" class="btn btn-danger"/></td>
+            <td><input type="button" value="update" (click)="updateProduct(pp)" class="btn btn-secondary"/></td>
     </tr>
 </table>
+{{deleteMsg}}
+<div *ngIf="flag">
+    <h2>Update Product</h2>
+    <form>
+        <label>PId</label>
+        <input type="text" name="pid" [(ngModel)]="pid" readonly/><br/>
+        <label>Price</label>
+        <input type="number" name="price" [(ngModel)]="price"/><br/>
+        <input type="button" value="update price" (click)="updateProductInfo()"/><br/>
+        <input type="reset" value="reset"/>
+    </form>
+</div>
+{{updateMsg}}
 </div>
