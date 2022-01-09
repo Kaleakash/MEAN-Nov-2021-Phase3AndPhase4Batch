@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="/socket.io/socket.io.js"></script>
+    <script type="text/JavaScript">
+        let socket = io(); 
+        // This code is use to send the data to server    
+        socket.emit("obj","Hello Server, I am client");
+        // this code is use to recevie the data from server 
+        socket.on("obj1",(msg)=> {
+            console.log(msg);// it display on browser console. 
+        })
+        let sendInfo = ()=> {
+            socket.emit("obj",{id:100,name:"Ravi"});
+        }
+    </script>
+</head>
+<body>
+    <h2>Welcome simple socket.io programming</h2>
+    <input type="button" value="send" onclick="sendInfo()"/>
+</body>
+</html>
