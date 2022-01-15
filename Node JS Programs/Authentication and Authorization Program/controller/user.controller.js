@@ -24,7 +24,26 @@ let register =async (req,res)=> {
                    res.send("Account didn't create")
             }
         })
-
 }
 
-module.exports={register}
+let signIn = async (req,res)=> {
+    // raj@gmail.com, 123
+    User.findOne({email:req.body.email}, async(err,u)=> {
+        //console.log(u);
+            if(!err){
+            if(u==null){
+                return res.send("Email Id is wrong")
+            }    
+            let validPassword = await bcrypt.compare(req.body.password,u.password);
+            if(!validPassword){
+                return res.send("Password is wrong")
+            }
+            // create the Token 
+            // payload contains id as well as type of user 
+            let payload = {id:u._id,user_type:u.user_type}
+            let token = jwt.sign(payload,"secretKey");
+            res.send({"token":token});
+            }
+    })
+}
+module.exports={register,signIn}
