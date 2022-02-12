@@ -5,7 +5,7 @@ let mongoose = require("mongoose");
 let productRouter = require("./router/product.router");
 
 // database URL 
-let url = "mongodb://localhost:27017/meanbatch1";
+let url = "mongodb://mongo:27017/meanbatch1";
 
 // create the express reference 
 let app = express();
