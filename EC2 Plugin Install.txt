@@ -37,6 +37,12 @@ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
 
 nvm install node		(node version manager)
 
+if getting error then run the below command as 
+
+nvm install 12.1.0
+
+
+
 
 -------> Mongo DB install 
 
